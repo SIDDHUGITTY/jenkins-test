@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # 4. Install dependencies
-RUN npm install --production
+RUN npm install 
 
 # 5. Copy all source code
 COPY . .
@@ -18,3 +18,4 @@ EXPOSE 3000
 
 # 7. Start the app
 CMD ["node", "server.js"]
+
