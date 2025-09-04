@@ -1,22 +1,23 @@
-# 1. Use official Node.js image
+# Use official Node.js base image
 FROM node:18
 
-# 2. Set working directory inside container
+# Set working directory
 WORKDIR /usr/src/app
 
-# 3. Copy package files
+# (Optional) Force npm to use registry explicitly (helps behind firewalls/DNS issues)
+RUN npm config set registry https://registry.npmjs.org/
+
+# Copy package.json and package-lock.json first
 COPY package*.json ./
 
-# 4. Install dependencies
-RUN npm install -D npm@latest -y
+# Install dependencies
+RUN npm install 
 
-# 5. Copy all source code
+# Copy the rest of the app
 COPY . .
 
-# 6. Expose app port
+# Expose app port
 EXPOSE 3000
 
-# 7. Start the app
+# Start app
 CMD ["node", "server.js"]
-
-
