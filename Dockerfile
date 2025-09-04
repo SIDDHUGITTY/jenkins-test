@@ -1,23 +1,14 @@
-# Use official Node.js base image
+# Use official Node.js image
 FROM node:18
 
-# Set working directory
 WORKDIR /usr/src/app
 
-# (Optional) Force npm to use registry explicitly (helps behind firewalls/DNS issues)
+# Force npm to use registry
 RUN npm config set registry https://registry.npmjs.org/
 
-# Copy package.json and package-lock.json first
 COPY package*.json ./
+RUN npm install --production
 
-# Install dependencies
-RUN npm install 
-
-# Copy the rest of the app
 COPY . .
-
-# Expose app port
 EXPOSE 3000
-
-# Start app
 CMD ["node", "server.js"]
