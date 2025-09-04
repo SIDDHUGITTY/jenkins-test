@@ -1,19 +1,19 @@
-# 1. Use an official Node.js base image
+# 1. Use official Node.js image
 FROM node:18
 
 # 2. Set working directory inside container
 WORKDIR /usr/src/app
 
-# 3. Copy package.json and package-lock.json
+# 3. Copy package files
 COPY package*.json ./
 
 # 4. Install dependencies
 RUN npm install --production
 
-# 5. Copy application source code
+# 5. Copy all source code
 COPY . .
 
-# 6. Expose the app port
+# 6. Expose app port
 EXPOSE 3000
 
 # 7. Start the app
